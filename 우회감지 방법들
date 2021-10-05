@@ -1,0 +1,75 @@
+########## 1. User Agent 지정 
+# 1)
+url = '웹페이지 주소'
+headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'}
+r = requests.get(url, headers=headers)
+soup = BeautifulSoup(r.text, 'html.parser')
+
+참조 : https://hogni.tistory.com/64
+
+
+# 2) 
+import requests 
+r = requests.get("URL")
+
+User-agent가 "urllib"가 아니기 때문에 필터링에 걸리지 않으며, 정보를 여러 형태의 타입으로 뽑는 메소드도 지원
+
+참조 : https://noodle-dev.tistory.com/41
+
+
+# 3) 
+firefox_profile = webdriver.FirefoxProfile() 
+firefox_profile.set_preference('general.useragent.override', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0') 
+self.driver = webdriver.Firefox(executable_path=".\geckodriver.exe", firefox_profile=firefox_profile)
+
+참조: https://pcmc.tistory.com/entry/190328-Crawler-Bot-Detection-Avoid-크롤러-탐지-우회?category=809836 [개발하자]
+
+# 4) 
+
+참조 : https://dev-guardy.tistory.com/76
+
+# 5) 
+
+참조 : https://tpwkcorqhd.tistory.com/10
+
+############## 2. 쿠키 처리
+from selenium import webdriver 
+driver = webdriver.PhantomJS() 
+driver.get("http://pythonscraping.com") 
+driver.implicitly_wait(1) cks = driver.get_cookies() 
+driver2 = webdriver.PhantomJS() 
+driver2.get("http://pythonscraping.com") 
+driver2.delete_all_cookie() 
+for ck in cks: driver2.add_cookie(ck)
+
+참조 : https://noodle-dev.tistory.com/41
+
+
+
+####### 3. Scrapinghub 사용 
+
+https://pcmc.tistory.com/entry/%ED%81%AC%EB%A1%A4%EB%9F%AC-%EB%A7%88%EC%9D%8C%EB%86%93%EA%B3%A0-%EB%8F%8C%EB%A6%AC%EA%B8%B0-Scrapinghub?category=809836
+
+
+####### 4. 잠시 sleep해서 부하 줄이기
+
+#사용자가 접속하는 것처럼 랜덤 값 사용
+
+rand_value = randint(1, MAX_SLEEP_TIME)
+time.sleep(rand_value)
+
+출처 : https://advenoh.tistory.com/3
+
+####### 5. Tor browser로 ip 우회 
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+for i in range(3):
+    chrome_options = Options()
+    chrome_options.add_argument("--proxy-server=socks5://127.0.0.1:9150")
+    driver = webdriver.Chrome(executable_path='C:/Users/user/Desktop/크롤링/crawler/crwaling code/chromedriver/chromedriver.exe', options=chrome_options)
+
+    driver.get('https://whatismyipaddress.com/')
+    
+[출처] Tor browser 로 selenium webdriver 크롤링 ip 우회 [Windosws]|작성자 달죽
+
